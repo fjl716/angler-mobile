@@ -2,16 +2,14 @@ let socket = null;
 let dispatch = null;
 
 export default {
-  open(url, app, callback){
+  open(url, app, ...callback){
     dispatch = app._store.dispatch;
     socket = new WebSocket(url);
     socket.onclose = function (event) {
       dispatch({type: 'ws/close'});
     };
     socket.onopen = function (event) {
-      if (callback) {
-        callback({socket, dispatch});
-      }
+      callback.map(func=>func({socket, dispatch}));
       dispatch({type: 'ws/open', payload: {socket: socket}});
       socket.onmessage = (message) => {
         let msg = JSON.parse(message.data);
