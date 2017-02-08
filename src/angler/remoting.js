@@ -4,6 +4,7 @@ let objectMap = {};
 let proxyCall = (obj)=> {
   console.log(obj);
 };
+
 function createObject(proxy) {
   const result = {};
   Object.assign(result, proxy.object);
@@ -27,43 +28,39 @@ function createObject(proxy) {
 }
 
 export default {
+  namespace: 'remoting',
   objectMap,
-  bindSocket: (socket) => {
-    socket.send(JSON.stringify({
-      event: 'remoting.get',
-    }));
+  state: {
+    list: [],
+  },
+
+  subscriptions: {
+    setup({dispatch, history}) {
+
+    },
+  },
+
+  getProxys({dispatch}){
+    dispatch({type: 'remoting/get', isSend: true});
+
     proxyCall = (obj) => {
-      socket.send(JSON.stringify({
-        event: 'remoting.invoke',
-        data: obj
-      }));
-    };
-    socket.onmessage = (message, dispatch) => {
-      let event = JSON.parse(message.data);
-      switch (event.event) {
-        case 'remoting.set':
-          for (let name in event.data) {
-            objectMap[name] = createObject(event.data[name]);
-          }
-          let a = null;
-          for (let name in objectMap) {
-            a = objectMap[name];
-          }
+      dispatch({type: 'remoting/invoke', payload: obj, isSend: true});
+    }
+  },
 
+  effects: {},
 
-          // a.sum(1,2,3,(result)=>{
-          //   console.log(result)
-          // });
-          break;
-        case 'remoting.result':
-          // console.log(event.data);
-          callbackMap[event.data.callId](event.data.data);
-          delete callbackMap[event.data.callId];
-          break;
-        default:
-          dispatch(event);
-          break;
+  reducers: {
+    set(state, action){
+      for (let name in action.payload) {
+        objectMap[name] = createObject(action.payload[name]);
       }
-    };
+      return state
+    },
+    result(state, action) {
+      callbackMap[action.payload.callId](action.payload.data);
+      delete callbackMap[action.payload.callId];
+      return state;
+    },
   },
 }

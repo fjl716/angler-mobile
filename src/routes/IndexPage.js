@@ -5,8 +5,6 @@ import styles from './IndexPage.less';
 import { Tabs,Button } from 'antd-mobile';
 
 const TabPane = Tabs.TabPane;
-let id = 0;
-// id:id++,
 function IndexPage({ dispatch ,user}) {
   return (
     <div className={styles.normal}>
