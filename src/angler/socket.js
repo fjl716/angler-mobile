@@ -1,5 +1,8 @@
+let socket = null;
+let dispatch = null;
+
 const defaultCallback = (socket) => {
-  socket.onmessage = (message, dispatch) => {
+  socket.onmessage = (message) => {
     let msg = JSON.parse(message.data);
     dispatch({
       type: msg.event.replace('.','/'),
@@ -7,8 +10,6 @@ const defaultCallback = (socket) => {
     });
   };
 };
-let socket = null;
-let dispatch = null;
 export default {
   open(url, app, callback){
     dispatch = app._store.dispatch;
@@ -25,7 +26,7 @@ export default {
   },
   socketSender: {
     onAction: () => {
-      return (msg) => {
+      return (basedispatch) => {
         return (action) => {
           if (action.isSend) {
             const sendObj = {
@@ -34,6 +35,7 @@ export default {
             };
             socket.send(JSON.stringify(sendObj));
           }
+          basedispatch(action);
         };
       };
     }

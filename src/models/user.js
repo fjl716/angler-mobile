@@ -1,12 +1,15 @@
 
 export default {
 
-  namespace: 'example',
+  namespace: 'user',
 
-  state: {},
+  state: {
+    list:[],
+  },
 
   subscriptions: {
     setup({ dispatch, history }) {
+
     },
   },
 
@@ -16,6 +19,10 @@ export default {
   },
 
   reducers: {
+    add(state, action){
+      state.list.push(action.payload);
+      return {...state}
+    },
     fetch(state, action) {
       return { ...state, ...action.payload };
     },

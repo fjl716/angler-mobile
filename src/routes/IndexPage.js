@@ -5,12 +5,15 @@ import styles from './IndexPage.less';
 import { Tabs,Button } from 'antd-mobile';
 
 const TabPane = Tabs.TabPane;
-
-
-function IndexPage({ dispatch }) {
+let id = 0;
+// id:id++,
+function IndexPage({ dispatch ,user}) {
   return (
     <div className={styles.normal}>
-      <Button onClick={()=>{dispatch({type: 'test/work',payload: {user:'fjl',pass:'pass'},isSend:true})}}>Test</Button>
+      <Button onClick={()=>{dispatch({type: 'user/insert',payload: {user:'fjl',pass:'pass'},isSend:true})}}>Test</Button>
+      {
+        user.list.map(item=>{return <p key={item._id}>{item.user}</p>})
+      }
       <Tabs defaultActiveKey="1" onChange={(key) => {
         console.log(key)
       }}>
@@ -43,4 +46,11 @@ function IndexPage({ dispatch }) {
 IndexPage.propTypes = {
 };
 
-export default connect()(IndexPage);
+function mapStateToProps({calendar,user}) {
+  return {
+    ...calendar,
+    user
+  };
+}
+
+export default connect(mapStateToProps)(IndexPage);
