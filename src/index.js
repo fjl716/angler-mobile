@@ -19,3 +19,4 @@ app.router(require('./router'));
 app.start('#root');
 
 socket.open('ws://localhost:8080',app,remoting.getProxys);
+// socket.open('ws://localhost:8080',app);

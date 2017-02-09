@@ -10,17 +10,14 @@ function createObject(proxy) {
   Object.assign(result, proxy.object);
   for (let name in proxy.functions) {
     result[name] = function () {
-      //console.log(arguments);
       const proxy = {};
       proxy.id = result.id;
       proxy.func = name;
-      proxy.params = [];
-      for (let name in arguments) {
-        proxy.params.push(arguments[name]);
-      }
+      proxy.params = Object.values(arguments);
       let callback = proxy.params[proxy.params.length - 1];
       proxy.callId = `${Math.random()}`.substr(2);
       callbackMap[proxy.callId] = callback;
+      proxy.params.pop();
       proxyCall(proxy);
     }
   }
