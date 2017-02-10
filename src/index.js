@@ -20,3 +20,36 @@ app.start('#root');
 
 socket.open('ws://localhost:8080',app,remoting.getProxys);
 // socket.open('ws://localhost:8080',app);
+
+
+// let o = {};
+//
+// Reflect.set(o, 'aaa', 123);
+//
+// console.log(o);
+//
+//
+//
+//
+// let proxy = createProxy({
+//   __ID__:123,
+// });
+//
+// class Server {
+//   constructor(__ID__, count) {
+//     this.__ID__ = __ID__;
+//     this.count = count;
+//   }
+//
+//   test(a, b, c) {
+//     return a + b + c + this.count;
+//   }
+// }
+//
+// let serverObj = new Server(123,12);
+// // console.log(serverObj.test(1,2,3));
+//
+// //console.log(proxy.count);
+// proxy.test(1,2,3,function (result) {
+//   console.log(result);
+// });

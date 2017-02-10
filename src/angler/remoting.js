@@ -1,27 +1,36 @@
 let callbackMap = {};
-let objectMap = {};
 
-let proxyCall = (obj)=> {
-  console.log(obj);
-};
+const objectMap = {};
 
-function createObject(proxy) {
-  const result = {};
-  Object.assign(result, proxy.object);
-  for (let name in proxy.functions) {
-    result[name] = function () {
-      const proxy = {};
-      proxy.id = result.id;
-      proxy.func = name;
-      proxy.params = Object.values(arguments);
-      let callback = proxy.params[proxy.params.length - 1];
-      proxy.callId = `${Math.random()}`.substr(2);
-      callbackMap[proxy.callId] = callback;
-      proxy.params.pop();
-      proxyCall(proxy);
-    }
-  }
-  return result;
+let dispatch = null;
+
+function create(obj) {
+  return new Proxy(obj, {
+    get: function (target, key, receiver) {
+      const original = Reflect.get(target, key, receiver);
+      if (original) {
+        return original
+      }
+      else {
+        const __ID__ = Reflect.get(target, '__ID__', receiver);
+        let handler = {
+          apply: function (target, thisBinding, args) {
+            const callback = args.pop();
+            const json = {
+              __CALL_ID__: `${Math.random()}`.substr(2),
+              __ID__: __ID__,
+              method: key,
+              params: args
+            };
+            Reflect.set(callbackMap, json.__CALL_ID__, callback);
+            dispatch({type: 'remoting/invoke', payload: json, isSend: true});
+          }
+        };
+        return new Proxy(() => {
+        }, handler);
+      }
+    },
+  });
 }
 
 export default {
@@ -32,31 +41,33 @@ export default {
   },
 
   subscriptions: {
-    setup({dispatch, history}) {
-
+    setup(obj) {
+      dispatch = obj.dispatch;
     },
   },
 
-  getProxys({dispatch}){
-    dispatch({type: 'remoting/get', isSend: true});
+  getProxys(){
+    dispatch({type: 'remoting', isSend: true});
+  },
 
-    proxyCall = (obj) => {
-      dispatch({type: 'remoting/invoke', payload: obj, isSend: true});
+  effects: {
+    *invoke(){
     }
   },
 
-  effects: {},
-
   reducers: {
+    invoke(state, action){
+      return state
+    },
     set(state, action){
-      for (let name in action.payload) {
-        objectMap[name] = createObject(action.payload[name]);
+      for(let name in action.payload){
+        Reflect.set(objectMap, name, create(action.payload[name]));
       }
       return state
     },
     result(state, action) {
-      callbackMap[action.payload.callId](action.payload.data);
-      delete callbackMap[action.payload.callId];
+      callbackMap[action.payload.__CALL_ID__](action.payload.data);
+      delete callbackMap[action.payload.__CALL_ID__];
       return state;
     },
   },

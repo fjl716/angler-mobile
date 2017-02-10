@@ -27,7 +27,6 @@ export default {
     },
   },
   reducers: {
-
     add(state, action){
       state.list.push(action.payload);
       return {...state}
@@ -36,5 +35,4 @@ export default {
       return {...state, ...action.payload};
     },
   },
-
 }
