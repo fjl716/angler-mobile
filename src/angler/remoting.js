@@ -47,7 +47,7 @@ export default {
   },
 
   getProxys(){
-    dispatch({type: 'remoting', isSend: true});
+    dispatch({type: 'remoting', payload: ['1'], isSend: true});
   },
 
   effects: {
@@ -60,7 +60,7 @@ export default {
       return state
     },
     set(state, action){
-      for(let name in action.payload){
+      for (let name in action.payload) {
         Reflect.set(objectMap, name, create(action.payload[name]));
       }
       return state
