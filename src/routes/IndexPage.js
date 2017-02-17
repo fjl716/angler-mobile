@@ -3,11 +3,20 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import styles from './IndexPage.less';
 import { Tabs,Button } from 'antd-mobile';
+import remoting from '../angler/remoting';
 
 const TabPane = Tabs.TabPane;
 function IndexPage({ dispatch ,user}) {
   return (
     <div className={styles.normal}>
+      <Button onClick={()=>{
+
+        const obj1 = remoting.create('1');
+        obj1.sum(1,2,3,function (result) {
+          console.log(result);
+        })
+
+      }}>Test</Button>
       <Button onClick={()=>{dispatch({type: 'user/login',payload: {user:'fjl',pass:'pass'},isSend:true})}}>Login</Button>
       <Button onClick={()=>{dispatch({type: 'user/data',payload: {user:'fjl',pass:'pass'},isSend:true})}}>data</Button>
       {

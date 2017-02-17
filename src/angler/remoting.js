@@ -4,8 +4,10 @@ const objectMap = {};
 
 let dispatch = null;
 
-function create(obj) {
-  return new Proxy(obj, {
+function create(__ID__) {
+  return new Proxy({
+    __ID__
+  }, {
     get: function (target, key, receiver) {
       const original = Reflect.get(target, key, receiver);
       if (original) {
@@ -40,6 +42,8 @@ export default {
     list: [],
   },
 
+  create,
+
   subscriptions: {
     setup(obj) {
       dispatch = obj.dispatch;
@@ -66,7 +70,7 @@ export default {
       return state
     },
     result(state, action) {
-      callbackMap[action.payload.__CALL_ID__](action.payload.data);
+      callbackMap[action.payload.__CALL_ID__](action.payload.result);
       delete callbackMap[action.payload.__CALL_ID__];
       return state;
     },
