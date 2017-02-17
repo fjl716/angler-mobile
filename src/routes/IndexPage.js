@@ -8,7 +8,8 @@ const TabPane = Tabs.TabPane;
 function IndexPage({ dispatch ,user}) {
   return (
     <div className={styles.normal}>
-      <Button onClick={()=>{dispatch({type: 'user/insert',payload: {user:'fjl',pass:'pass'},isSend:true})}}>Test</Button>
+      <Button onClick={()=>{dispatch({type: 'user/login',payload: {user:'fjl',pass:'pass'},isSend:true})}}>Login</Button>
+      <Button onClick={()=>{dispatch({type: 'user/data',payload: {user:'fjl',pass:'pass'},isSend:true})}}>data</Button>
       {
         user.list.map(item=>{return <p key={item._id}>{item.user}</p>})
       }
