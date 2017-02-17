@@ -16,9 +16,9 @@ function IndexPage({ dispatch ,user}) {
           console.log(result);
         })
 
-      }}>Test</Button>
-      <Button onClick={()=>{dispatch({type: 'user/login',payload: {user:'fjl',pass:'pass'},isSend:true})}}>Login</Button>
-      <Button onClick={()=>{dispatch({type: 'user/data',payload: {user:'fjl',pass:'pass'},isSend:true})}}>data</Button>
+      }}>Test RPC</Button>
+      <Button onClick={()=>{dispatch({type: 'user/login',payload: {user:'fjl',pass:'pass'},isSend:true})}}>Login 启动2个任务</Button>
+      <Button onClick={()=>{dispatch({type: 'user/data',payload: {user:'fjl',pass:'pass'},isSend:true})}}>返回任务信息data</Button>
       {
         user.list.map(item=>{return <p key={item._id}>{item.user}</p>})
       }
