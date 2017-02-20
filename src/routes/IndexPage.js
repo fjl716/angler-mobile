@@ -33,21 +33,21 @@ function IndexPage({ dispatch ,user}) {
               <Button onClick={()=>{dispatch({type: 'user/push->arr',payload: {query:{user:'fjl'},object:{group:'123456'}},isSend:true})}}>push</Button>
             </Flex.Item>
             <Flex.Item>
-              <Button onClick={()=>{dispatch({type: 'user/pop',payload: {user:'fjl',pass:'pass'},isSend:true})}}>pop</Button>
+              <Button onClick={()=>{dispatch({type: 'user/pop->arr',payload: {query:{user:'fjl'},object:{group:'123456'}},isSend:true})}}>pop</Button>
             </Flex.Item>
           </Flex>
           <WhiteSpace size="lg" />
           <Flex>
             <Flex.Item>
-              <Button onClick={()=>{dispatch({type: 'user/get',payload: {user:'fjl',pass:'pass'},isSend:true})}}>get</Button>
+              <Button onClick={()=>{dispatch({type: 'user/get',payload: {user:'fjl'},isSend:true})}}>get</Button>
             </Flex.Item>
 
             <Flex.Item>
-              <Button onClick={()=>{dispatch({type: 'user/getsimple',payload: {user:'fjl',pass:'pass'},isSend:true})}}>get simple</Button>
+              <Button onClick={()=>{dispatch({type: 'user/getsimple',payload: {user:'fjl'},isSend:true})}}>get simple</Button>
             </Flex.Item>
 
             <Flex.Item>
-              <Button onClick={()=>{dispatch({type: 'user/getproperty',payload: {user:'fjl',pass:'pass'},isSend:true})}}>get property</Button>
+              <Button onClick={()=>{dispatch({type: 'user/get->pass',payload: {user:'fjl'},isSend:true})}}>get property</Button>
             </Flex.Item>
           </Flex>
         </TabPane>
