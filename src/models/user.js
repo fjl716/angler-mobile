@@ -20,6 +20,18 @@ export default {
     },
   },
   reducers: {
+    load(state, action){
+      alert(`get成功`,`${action.payload._id}`);
+      return {...state}
+    },
+    loadsimple(state, action){
+      alert(`get simple 成功`,`${action.payload._id}`);
+      return {...state}
+    },
+    loadproperty(state, action){
+      alert(`get property 成功`,`${action.payload._id}`);
+      return {...state}
+    },
     add(state, action){
       alert(`添加成功`,`${action.payload._id}`);
       return {...state}
@@ -32,5 +44,6 @@ export default {
       alert(`更新成功`,`${action.payload._id}`);
       return {...state}
     },
+
   },
 }
