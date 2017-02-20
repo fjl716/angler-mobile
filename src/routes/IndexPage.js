@@ -21,16 +21,16 @@ function IndexPage({ dispatch ,user}) {
               <Button onClick={()=>{dispatch({type: 'user/insert',payload: {user:'fjl',pass:'pass'},isSend:true})}}>insert</Button>
             </Flex.Item>
             <Flex.Item>
-              <Button onClick={()=>{dispatch({type: 'user/delete',payload: {user:'fjl',pass:'pass'},isSend:true})}}>delete</Button>
+              <Button onClick={()=>{dispatch({type: 'user/delete',payload: {user:'fjl'},isSend:true})}}>delete</Button>
             </Flex.Item>
           </Flex>
           <WhiteSpace size="lg" />
           <Flex>
             <Flex.Item>
-              <Button onClick={()=>{dispatch({type: 'user/update',payload: {user:'fjl',pass:'pass'},isSend:true})}}>update</Button>
+              <Button onClick={()=>{dispatch({type: 'user/update',payload: {query:{user:'fjl'},set:{pass:'123456'}},isSend:true})}}>update</Button>
             </Flex.Item>
             <Flex.Item>
-              <Button onClick={()=>{dispatch({type: 'user/push',payload: {user:'fjl',pass:'pass'},isSend:true})}}>push</Button>
+              <Button onClick={()=>{dispatch({type: 'user/push->arr',payload: {query:{user:'fjl'},object:{group:'123456'}},isSend:true})}}>push</Button>
             </Flex.Item>
             <Flex.Item>
               <Button onClick={()=>{dispatch({type: 'user/pop',payload: {user:'fjl',pass:'pass'},isSend:true})}}>pop</Button>

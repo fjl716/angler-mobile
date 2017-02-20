@@ -28,6 +28,9 @@ export default {
       alert(`删除成功`,`${action.payload._id}`);
       return {...state}
     },
-
+    change(state, action){
+      alert(`更新成功`,`${action.payload._id}`);
+      return {...state}
+    },
   },
 }
