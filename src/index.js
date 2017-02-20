@@ -12,6 +12,9 @@ app.use(socket.socketSender);
 // 3. Model
 app.model(remoting);
 app.model(require('./models/user'));
+app.model(require('./models/retry'));
+app.model(require('./models/tick'));
+
 // 4. Router
 app.router(require('./router'));
 

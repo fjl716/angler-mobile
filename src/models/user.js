@@ -1,4 +1,6 @@
-import remoting from '../angler/remoting';
+import { Modal} from 'antd-mobile';
+const alert = Modal.alert;
+
 export default {
 
   namespace: 'user',
@@ -17,13 +19,6 @@ export default {
     *fetchRemote({payload}, {call, put}) {
     },
     *insert(){
-      let a;
-      for (let name in remoting.objectMap) {
-        a = remoting.objectMap[name];
-      }
-      a.sum(1, 2, 3, function (result) {
-        console.log(result);
-      });
     },
   },
   reducers: {

@@ -2,48 +2,84 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import styles from './IndexPage.less';
-import { Tabs,Button } from 'antd-mobile';
+import { Tabs,Button,Flex,WhiteSpace } from 'antd-mobile';
 import remoting from '../angler/remoting';
+import { Modal} from 'antd-mobile';
+const alert = Modal.alert;
 
 const TabPane = Tabs.TabPane;
 function IndexPage({ dispatch ,user}) {
   return (
     <div className={styles.normal}>
-      <Button onClick={()=>{
-
-        const obj1 = remoting.create('1');
-        obj1.sum(1,2,3,function (result) {
-          console.log(result);
-        })
-
-      }}>Test RPC</Button>
-      <Button onClick={()=>{dispatch({type: 'user/login',payload: {user:'fjl',pass:'pass'},isSend:true})}}>Login 启动2个任务</Button>
-      <Button onClick={()=>{dispatch({type: 'user/data',payload: {user:'fjl',pass:'pass'},isSend:true})}}>返回任务信息data</Button>
-      {
-        user.list.map(item=>{return <p key={item._id}>{item.user}</p>})
-      }
       <Tabs defaultActiveKey="1" onChange={(key) => {
         console.log(key)
       }}>
-        <TabPane tab="选项卡一" key="1">
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center', height: 100,
-          }}>
-            选项卡一内容
-          </div>
+        <TabPane tab="数据库操作" key="1">
+          <WhiteSpace size="lg" />
+          <Flex>
+            <Flex.Item>
+              <Button onClick={()=>{dispatch({type: 'user/insert',payload: {user:'fjl',pass:'pass'},isSend:true})}}>insert</Button>
+            </Flex.Item>
+            <Flex.Item>
+              <Button onClick={()=>{dispatch({type: 'user/delete',payload: {user:'fjl',pass:'pass'},isSend:true})}}>delete</Button>
+            </Flex.Item>
+          </Flex>
+          <WhiteSpace size="lg" />
+          <Flex>
+            <Flex.Item>
+              <Button onClick={()=>{dispatch({type: 'user/update',payload: {user:'fjl',pass:'pass'},isSend:true})}}>update</Button>
+            </Flex.Item>
+            <Flex.Item>
+              <Button onClick={()=>{dispatch({type: 'user/push',payload: {user:'fjl',pass:'pass'},isSend:true})}}>push</Button>
+            </Flex.Item>
+            <Flex.Item>
+              <Button onClick={()=>{dispatch({type: 'user/pop',payload: {user:'fjl',pass:'pass'},isSend:true})}}>pop</Button>
+            </Flex.Item>
+          </Flex>
+          <WhiteSpace size="lg" />
+          <Flex>
+            <Flex.Item>
+              <Button onClick={()=>{dispatch({type: 'user/get',payload: {user:'fjl',pass:'pass'},isSend:true})}}>get</Button>
+            </Flex.Item>
+
+            <Flex.Item>
+              <Button onClick={()=>{dispatch({type: 'user/getsimple',payload: {user:'fjl',pass:'pass'},isSend:true})}}>get simple</Button>
+            </Flex.Item>
+
+            <Flex.Item>
+              <Button onClick={()=>{dispatch({type: 'user/getproperty',payload: {user:'fjl',pass:'pass'},isSend:true})}}>get property</Button>
+            </Flex.Item>
+          </Flex>
         </TabPane>
-        <TabPane tab="选项卡二" key="2">
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center', height: 100,
-          }}>
-            选项卡二内容
-          </div>
+        <TabPane tab="Task测试" key="2">
+
+          <WhiteSpace size="lg" />
+          <Flex>
+            <Flex.Item>
+            <Button onClick={()=>{dispatch({type: 'task/tick',payload: {},isSend:true})}}>启动tick任务</Button>
+            </Flex.Item>
+            <Flex.Item>
+            <Button onClick={()=>{dispatch({type: 'task/retry',payload: {},isSend:true})}}>启动retry任务</Button>
+            </Flex.Item>
+          </Flex>
+
+          <WhiteSpace size="lg" />
+          <Flex>
+            <Flex.Item>
+              <Button onClick={()=>{dispatch({type: 'task/data',payload: {data:(`${Math.random()}`.substr(2))},isSend:true})}}>发送任务数据</Button>
+            </Flex.Item>
+          </Flex>
         </TabPane>
-        <TabPane tab="选项卡三" key="3">
+        <TabPane tab="Rpc调用测试" key="3">
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', height: 100,
           }}>
-            选项卡三内容
+            <Button onClick={()=>{
+              const obj1 = remoting.create('1');
+              obj1.sum(1,2,3,function (result) {
+                alert(`返回结果`,`obj1.sum(1,2,3)=${result}`);
+              })
+            }}>Test RPC</Button>
           </div>
         </TabPane>
       </Tabs>
