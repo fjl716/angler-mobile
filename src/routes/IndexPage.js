@@ -20,22 +20,22 @@ function IndexPage({ dispatch ,user}) {
               <WhiteSpace size="lg" />
               <Flex>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'user/insert',payload: {user:'fjl',pass:'pass'},isSend:true})}}>insert</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/insert',payload: {user:'fjl',pass:'pass'},isSend:true})}}>insert</Button>
                 </Flex.Item>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'user/delete',payload: {user:'fjl'},isSend:true})}}>delete</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/delete',payload: {user:'fjl'},isSend:true})}}>delete</Button>
                 </Flex.Item>
               </Flex>
               <WhiteSpace size="lg" />
               <Flex>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'user/update',payload: {query:{user:'fjl'},set:{pass:'123456'}},isSend:true})}}>update</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/update',payload: {query:{user:'fjl'},set:{pass:'123456'}},isSend:true})}}>update</Button>
                 </Flex.Item>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'user/push->arr',payload: {query:{user:'fjl'},object:{group:'123456'}},isSend:true})}}>push</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/push->arr',payload: {query:{user:'fjl'},object:{group:'123456'}},isSend:true})}}>push</Button>
                 </Flex.Item>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'user/pop->arr',payload: {query:{user:'fjl'},object:{group:'123456'}},isSend:true})}}>pop</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/pop->arr',payload: {query:{user:'fjl'},object:{group:'123456'}},isSend:true})}}>pop</Button>
                 </Flex.Item>
               </Flex>
             </Accordion.Panel>
@@ -43,15 +43,15 @@ function IndexPage({ dispatch ,user}) {
               <WhiteSpace size="lg" />
               <Flex>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'user/get',payload: {user:'fjl'},isSend:true})}}>get</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/get',payload: {user:'fjl'},isSend:true})}}>get</Button>
                 </Flex.Item>
 
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'user/getsimple',payload: {user:'fjl'},isSend:true})}}>simple</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/getsimple',payload: {user:'fjl'},isSend:true})}}>simple</Button>
                 </Flex.Item>
 
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'user/get->pass',payload: {user:'fjl'},isSend:true})}}>property</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/get->pass',payload: {user:'fjl'},isSend:true})}}>property</Button>
                 </Flex.Item>
               </Flex>
             </Accordion.Panel>
