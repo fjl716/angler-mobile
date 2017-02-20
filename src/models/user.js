@@ -21,11 +21,13 @@ export default {
   },
   reducers: {
     add(state, action){
-      state.list.push(action.payload);
+      alert(`添加成功`,`${action.payload._id}`);
       return {...state}
     },
-    fetch(state, action) {
-      return {...state, ...action.payload};
+    remove(state, action){
+      alert(`删除成功`,`${action.payload._id}`);
+      return {...state}
     },
+
   },
 }
