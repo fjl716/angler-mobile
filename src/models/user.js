@@ -18,8 +18,6 @@ export default {
   effects: {
     *fetchRemote({payload}, {call, put}) {
     },
-    *insert(){
-    },
   },
   reducers: {
     add(state, action){
