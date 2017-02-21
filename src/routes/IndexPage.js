@@ -64,11 +64,6 @@ function IndexPage({ dispatch ,user}) {
                     dispatch({type: 'user/insert', payload: {name: 'fjl', pass: '123', age: 1}, isSend: true});
                   }}>init</Button>
                 </Flex.Item>
-                <Flex.Item>
-                  <Button type="primary" onClick={()=>{
-                    dispatch({type: 'user/delete',payload: {user:'fjl'},isSend:true})
-                  }}>clear</Button>
-                </Flex.Item>
               </Flex>
 
               <WhiteSpace size="lg" />
@@ -82,6 +77,11 @@ function IndexPage({ dispatch ,user}) {
                   <Button type="primary" onClick={()=> {
                     dispatch({type: 'user/update', payload: {query:{name:'fjl'},set:{age:2}}, isSend: true});
                   }}>change</Button>
+                </Flex.Item>
+                <Flex.Item>
+                  <Button type="primary" onClick={()=>{
+                    dispatch({type: 'user/delete',payload: {user:'fjl'},isSend:true})
+                  }}>remove</Button>
                 </Flex.Item>
               </Flex>
             </Accordion.Panel>
