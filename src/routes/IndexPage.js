@@ -110,16 +110,25 @@ function IndexPage({ dispatch ,user}) {
           </Flex>
         </TabPane>
         <TabPane tab="Rpc调用测试" key="3">
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center', height: 100,
-          }}>
+          <WhiteSpace size="lg" />
+            <Flex>
+              <Flex.Item>
             <Button type="primary" onClick={()=>{
               const obj1 = remoting.create('1');
               obj1.sum(1,2,3,function (result) {
                 alert(`返回结果`,`obj1.sum(1,2,3)=${result}`);
               })
             }}>Test RPC</Button>
-          </div>
+              </Flex.Item>
+              <Flex.Item>
+            <Button type="primary" onClick={()=>{
+              const obj1 = remoting.create('1');
+              obj1.find(function (result) {
+                alert(`返回结果`,`${result._id}`);
+              })
+            }}>Test Async RPC</Button>
+              </Flex.Item>
+            </Flex>
         </TabPane>
       </Tabs>
     </div>
