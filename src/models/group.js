@@ -3,7 +3,7 @@ const alert = Modal.alert;
 
 export default {
 
-  namespace: 'region',
+  namespace: 'group',
 
   state: {
     list: [],
@@ -16,31 +16,31 @@ export default {
   },
 
   effects: {
-
+    * add({payload}, {select, call, put}){
+      console.log(payload);
+      yield put();
+    },
+    // dispatch({type: 'group/insert',payload: {name:'test1'},isSend:true})}
   },
   reducers: {
     load(state, action){
-      alert(`region get成功`,`${action.payload._id}`);
+      alert(`group get成功`,`${action.payload._id}`);
       return {...state}
     },
     loadsimple(state, action){
-      alert(`region get simple 成功`,`${action.payload._id}`);
+      alert(`group get simple 成功`,`${action.payload._id}`);
       return {...state}
     },
     loadproperty(state, action){
-      alert(`region get property 成功`,`${action.payload._id}`);
-      return {...state}
-    },
-    add(state, action){
-      alert(`region 添加成功`,`${action.payload._id}`);
+      alert(`group get property 成功`,`${action.payload._id}`);
       return {...state}
     },
     remove(state, action){
-      alert(`region 删除成功`,`${action.payload._id}`);
+      alert(`group 删除成功`,`${action.payload._id}`);
       return {...state}
     },
     change(state, action){
-      alert(`region 更新成功`,`${action.payload._id}`);
+      alert(`group 更新成功`,`${action.payload._id}`);
       return {...state}
     },
 

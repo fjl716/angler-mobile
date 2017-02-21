@@ -20,22 +20,22 @@ function IndexPage({ dispatch ,user}) {
               <WhiteSpace size="lg" />
               <Flex>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'region/insert',payload: {user:'fjl',pass:'pass'},isSend:true})}}>insert</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/insert',payload: {name:'A1',index:1},isSend:true})}}>insert</Button>
                 </Flex.Item>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'region/delete',payload: {user:'fjl'},isSend:true})}}>delete</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/delete',payload: {name:'A1'},isSend:true})}}>delete</Button>
                 </Flex.Item>
               </Flex>
               <WhiteSpace size="lg" />
               <Flex>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'region/update',payload: {query:{user:'fjl'},set:{pass:'123456'}},isSend:true})}}>update</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/update',payload: {query:{name:'A1'},set:{index:2}},isSend:true})}}>update</Button>
                 </Flex.Item>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'region/push->arr',payload: {query:{user:'fjl'},object:{group:'123456'}},isSend:true})}}>push</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/push>arr',payload: {query:{name:'A1'},object:{sub:'123456'}},isSend:true})}}>push</Button>
                 </Flex.Item>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'region/pop->arr',payload: {query:{user:'fjl'},object:{group:'123456'}},isSend:true})}}>pop</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/pop>arr',payload: {query:{name:'A1'},object:{sub:'123456'}},isSend:true})}}>pop</Button>
                 </Flex.Item>
               </Flex>
             </Accordion.Panel>
@@ -43,20 +43,47 @@ function IndexPage({ dispatch ,user}) {
               <WhiteSpace size="lg" />
               <Flex>
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'region/get',payload: {user:'fjl'},isSend:true})}}>get</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/get',payload: {name:'A1'},isSend:true})}}>get</Button>
                 </Flex.Item>
 
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'region/getsimple',payload: {user:'fjl'},isSend:true})}}>simple</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/getsimple',payload: {name:'A1'},isSend:true})}}>simple</Button>
                 </Flex.Item>
 
                 <Flex.Item>
-                  <Button type="primary" onClick={()=>{dispatch({type: 'region/get->pass',payload: {user:'fjl'},isSend:true})}}>property</Button>
+                  <Button type="primary" onClick={()=>{dispatch({type: 'region/get>pass',payload: {name:'A1'},isSend:true})}}>property</Button>
                 </Flex.Item>
               </Flex>
             </Accordion.Panel>
             <Accordion.Panel header="关联操作">
+              <WhiteSpace size="lg" />
+              <Flex>
+                <Flex.Item>
+                  <Button type="primary" onClick={()=> {
+                    dispatch({type: 'group/insert', payload: {name: 'test1'}, isSend: true});
+                    dispatch({type: 'user/insert', payload: {name: 'fjl', pass: '123', age: 1}, isSend: true});
+                  }}>init</Button>
+                </Flex.Item>
+                <Flex.Item>
+                  <Button type="primary" onClick={()=>{
+                    dispatch({type: 'user/delete',payload: {user:'fjl'},isSend:true})
+                  }}>clear</Button>
+                </Flex.Item>
+              </Flex>
 
+              <WhiteSpace size="lg" />
+              <Flex>
+                <Flex.Item>
+                  <Button type="primary" onClick={()=> {
+                    dispatch({type: 'group/push->users', payload: {query:{name:'test1'},object:{name: 'fjl'}}, isSend: true});
+                  }}>push simple</Button>
+                </Flex.Item>
+                <Flex.Item>
+                  <Button type="primary" onClick={()=> {
+                    dispatch({type: 'user/update', payload: {query:{name:'fjl'},set:{age:2}}, isSend: true});
+                  }}>change</Button>
+                </Flex.Item>
+              </Flex>
             </Accordion.Panel>
             <Accordion.Panel header="Watcher操作">
 
