@@ -51,7 +51,7 @@ export default {
   },
 
   getProxys(){
-    dispatch({type: 'remoting', payload: ['1'], isSend: true});
+    // dispatch({type: 'remoting', payload: ['1'], isSend: true});
   },
 
   effects: {

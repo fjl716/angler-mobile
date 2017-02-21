@@ -80,7 +80,7 @@ function IndexPage({ dispatch ,user}) {
                 </Flex.Item>
                 <Flex.Item>
                   <Button type="primary" onClick={()=>{
-                    dispatch({type: 'user/delete',payload: {user:'fjl'},isSend:true})
+                    dispatch({type: 'user/delete',payload: {name:'fjl'},isSend:true})
                   }}>remove</Button>
                 </Flex.Item>
               </Flex>
